@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { MathRenderer } from "./MathRenderer";
 
 interface ChatMessagesProps {
   messages: Message[];
@@ -42,9 +43,7 @@ export function ChatMessages({
                     : "bg-blue-600 text-white"
                 }`}
               >
-                <p className="text-sm whitespace-pre-wrap break-words">
-                  {msg.content}
-                </p>
+                <MathRenderer content={msg.content} />
               </div>
             </div>
           );
@@ -53,10 +52,8 @@ export function ChatMessages({
         {streamingMessage && (
           <div className="flex justify-start">
             <div className="rounded-lg px-4 py-2 max-w-[80%] bg-gray-700 text-white">
-              <p className="text-sm whitespace-pre-wrap break-words">
-                {streamingMessage}
-                <span className="inline-block ml-1 animate-pulse">▊</span>
-              </p>
+              <MathRenderer content={streamingMessage} />
+              <span className="inline-block ml-1 animate-pulse">▊</span>
             </div>
           </div>
         )}
