@@ -1,5 +1,31 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+# OpenTutor - Your Personal Teaching Assistant
+
+OpenTutor is an AI-powered teaching assistant designed to help students with different subject of focus. It provides real-time assistance, explanations, and guidance for various concepts and problems.
+
+## Features
+
+- 💬 Real-time Feedback
+- 📚 Subject-focused Assistance
+- 🙌 Prompt History Sharing
+- ‼️ Banning Direct Solution Query
+- 💾 Conversation History
+- 🎨 Modern, Responsive Design
+- 🔐 Secure Authentication
+- 🌓 Dark/Light Mode
+
+## Prerequisites
+
+Before you begin, ensure you have installed:
+- Node.js (v18 or higher)
+- npm or yarn
+- Git
+
+## Environment Setup
+
+1. Create a `.env` file in the root directory with the following variables:
+
 ## Getting Started
 
 First, run the development server:
