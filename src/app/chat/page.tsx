@@ -176,7 +176,10 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col h-screen bg-[var(--background)]">
-      <ChatHeader username={session.user.name || "Anonymous"} />
+      <ChatHeader
+        username={session.user.name || "Anonymous"}
+        userImage={session.user.image || null}
+      />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar
           conversations={conversations}
