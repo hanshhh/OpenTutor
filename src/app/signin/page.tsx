@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
@@ -64,10 +65,19 @@ export default function SignIn() {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-[var(--text-secondary)]">
-            Your personal teaching assistant for statistics
+            Your personal teaching assistant
           </p>
           <p className="mt-2 text-xs text-[var(--text-secondary)]">
             Sign in to start learning
+          </p>
+        </div>
+
+        <div className="mt-6 text-center">
+          <p className="text-sm text-[var(--text-secondary)]">
+            Don't have an account?{" "}
+            <Link href="/signup" className="text-blue-500 hover:underline">
+              Sign up
+            </Link>
           </p>
         </div>
       </div>
