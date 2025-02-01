@@ -26,6 +26,15 @@ Before you begin, ensure you have installed:
 
 1. Create a `.env` file in the root directory with the following variables:
 
+```
+DATABASE_URL=
+OPENAI_API_KEY=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET=
+```
+
 ## Getting Started
 
 First, run the development server:
