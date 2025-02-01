@@ -28,11 +28,11 @@ export function Sidebar({
     setEditTitle(conversation.title);
   };
 
-  const handleEditSave = async (id: string) => {
-    if (editTitle.trim()) {
-      await onUpdateConversationTitle(id, editTitle.trim());
-      setEditingId(null);
+  const handleEditSave = (id: string) => {
+    if (editTitle.trim() !== "") {
+      onUpdateConversationTitle(id, editTitle.trim());
     }
+    setEditingId(null);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent, id: string) => {
@@ -44,39 +44,35 @@ export function Sidebar({
   };
 
   return (
-    <div className="w-64 bg-[var(--sidebar-bg)] border-r border-gray-800 flex flex-col">
-      <div className="px-4 py-3 border-b border-gray-800">
-        <label htmlFor="course" className="block text-xs text-gray-400 mb-1">
-          Course
-        </label>
-        <select
-          id="course"
-          className="w-full bg-[var(--sidebar-bg)] border border-gray-700 rounded px-2 py-1 text-sm text-gray-200 focus:outline-none"
-        >
-          <option>STA238H1</option>
-        </select>
+    <div className="w-64 flex flex-col bg-[var(--sidebar-bg)] border-r border-[var(--border-color)]">
+      <div className="p-4">
+        <input
+          type="text"
+          placeholder="Course"
+          className="w-full px-3 py-2 bg-[var(--input-bg)] border border-[var(--border-color)] rounded-md text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
 
-      <div className="p-3 flex items-center gap-3 border-b border-gray-800">
-        <button className="p-2 rounded bg-[var(--input-bg)] hover:bg-[#3D3D3D]">
+      <div className="p-3 flex items-center gap-3 border-y border-[var(--border-color)]">
+        <button className="p-2 rounded bg-[var(--input-bg)] hover:bg-[var(--button-hover)] transition-colors">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
+            className="h-4 w-4 text-[var(--text-primary)]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
+              strokeWidth={2}
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
         </button>
         <button
           onClick={onNewConversation}
-          className="flex-1 bg-[#4B69FF] rounded px-3 py-2 text-xs font-medium hover:bg-[#5B79FF]"
+          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white rounded px-3 py-2 text-sm font-medium transition-colors"
         >
           New Conversation
         </button>
@@ -86,8 +82,8 @@ export function Sidebar({
         {conversations.map((conv) => (
           <div
             key={conv.id}
-            className={`group px-4 py-3 cursor-pointer hover:bg-gray-800 flex items-center justify-between ${
-              conv.id === currentConversation ? "bg-gray-800" : ""
+            className={`group px-4 py-3 cursor-pointer hover:bg-[var(--hover-bg)] transition-colors flex items-center justify-between ${
+              conv.id === currentConversation ? "bg-[var(--hover-bg)]" : ""
             }`}
           >
             {editingId === conv.id ? (
@@ -97,25 +93,25 @@ export function Sidebar({
                 onChange={(e) => setEditTitle(e.target.value)}
                 onBlur={() => handleEditSave(conv.id)}
                 onKeyDown={(e) => handleKeyPress(e, conv.id)}
-                className="flex-1 bg-gray-700 text-white px-2 py-1 rounded text-sm"
+                className="flex-1 bg-[var(--input-bg)] text-[var(--text-primary)] px-2 py-1 rounded text-sm border border-[var(--border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500"
                 autoFocus
               />
             ) : (
               <div
                 onClick={() => onSelectConversation(conv.id)}
-                className="flex-1 text-gray-300 hover:text-white text-sm truncate"
+                className="flex-1 text-[var(--text-primary)] hover:text-[var(--text-primary)] text-sm truncate"
               >
                 {conv.title}
               </div>
             )}
 
-            <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   handleEditStart(conv);
                 }}
-                className="text-gray-400 hover:text-white"
+                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               >
                 <svg
                   className="w-4 h-4"
@@ -142,7 +138,7 @@ export function Sidebar({
                     onDeleteConversation(conv.id);
                   }
                 }}
-                className="text-gray-400 hover:text-red-500"
+                className="text-[var(--text-secondary)] hover:text-red-500 transition-colors"
               >
                 <svg
                   className="w-4 h-4"

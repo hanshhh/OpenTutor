@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { MathRenderer } from "./MathRenderer";
+import { Message } from "@prisma/client";
 
 interface ChatMessagesProps {
   messages: Message[];

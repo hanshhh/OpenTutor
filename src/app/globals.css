@@ -3,20 +3,115 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Light mode variables */
+    --background: #ffffff;
+    --chat-bg: #f8fafc;
+    --sidebar-bg: #ffffff;
+    --input-bg: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-color: #e2e8f0;
+    --hover-bg: #f1f5f9;
+    --message-bg-user: #2563eb;
+    --message-bg-assistant: #f1f5f9;
+    --message-text-user: #ffffff;
+    --message-text-assistant: #0f172a;
+    --button-hover: #e2e8f0;
+    --dropdown-bg: #ffffff;
+    --dropdown-hover: #f1f5f9;
+    --dropdown-border: #e2e8f0;
+    --code-bg: #f8fafc;
+    --scrollbar-thumb: #cbd5e1;
+    --scrollbar-track: #f1f5f9;
+  }
+
+  :root[class~="dark"] {
+    /* Dark mode variables */
+    --background: #000000;
+    --chat-bg: #111111;
+    --sidebar-bg: #1a1a1a;
+    --input-bg: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #9ca3af;
+    --border-color: #2d2d2d;
+    --hover-bg: #2d2d2d;
+    --message-bg-user: #2563eb;
+    --message-bg-assistant: #2d2d2d;
+    --message-text-user: #ffffff;
+    --message-text-assistant: #ffffff;
+    --button-hover: #374151;
+    --dropdown-bg: #1a1a1a;
+    --dropdown-hover: #2d2d2d;
+    --dropdown-border: #374151;
+    --code-bg: #1a1a1a;
+    --scrollbar-thumb: #4b5563;
+    --scrollbar-track: #1a1a1a;
   }
 }
 
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
 body {
-  color: var(--foreground);
-  background: var(--background);
+  @apply bg-[var(--background)] text-[var(--text-primary)];
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Message styling */
+.message-content {
+  @apply rounded-lg px-4 py-2 max-w-[80%];
+}
+
+.message-user {
+  @apply bg-[var(--message-bg-user)] text-[var(--message-text-user)];
+}
+
+.message-assistant {
+  @apply bg-[var(--message-bg-assistant)] text-[var(--message-text-assistant)];
+}
+
+/* Input styling */
+.chat-input {
+  @apply bg-[var(--input-bg)] border border-[var(--border-color)] focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+/* Button styling */
+.primary-button {
+  @apply bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.secondary-button {
+  @apply bg-[var(--input-bg)] text-[var(--text-primary)] hover:bg-[var(--button-hover)];
+}
+
+/* Code block styling */
+.code-block {
+  @apply bg-[var(--code-bg)] border border-[var(--border-color)] rounded-md p-4;
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+  @apply bg-[var(--dropdown-bg)] border border-[var(--dropdown-border)] shadow-lg rounded-md;
+}
+
+.dropdown-item {
+  @apply hover:bg-[var(--dropdown-hover)] text-[var(--text-primary)];
 }

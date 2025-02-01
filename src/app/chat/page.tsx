@@ -7,6 +7,8 @@ import { Sidebar } from "@/components/chat/Sidebar";
 import { ChatMessages } from "@/components/chat/ChatMessages";
 import { ChatInput } from "@/components/chat/ChatInput";
 import type { Message, Conversation } from "@/types/chat";
+import { redirect } from "next/navigation";
+import { Message as PrismaMessage } from "@prisma/client";
 
 export default function ChatPage() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -16,8 +18,14 @@ export default function ChatPage() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/signin");
+    },
+  });
   const [streamingMessage, setStreamingMessage] = useState<string>("");
+  const [messages, setMessages] = useState<PrismaMessage[]>([]);
 
   useEffect(() => {
     if (session?.user) {
@@ -45,8 +53,11 @@ export default function ChatPage() {
     setMessage("");
   };
 
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSendMessage = async (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+
     if (!message.trim() || isLoading) return;
 
     setIsLoading(true);

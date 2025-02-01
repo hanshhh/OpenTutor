@@ -1,30 +1,75 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import { useState } from "react";
 import Image from "next/image";
 
 export default function SignIn() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    setIsLoading(true);
+    try {
+      await signIn("google", { callbackUrl: "/chat" });
+    } catch (error) {
+      console.error("Sign in error:", error);
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#121212]">
-      <div className="bg-[#1E1E1E] p-8 rounded-lg shadow-lg w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-white mb-2">
-            Welcome to Open<span className="text-blue-500">TA</span>
-          </h1>
-          <p className="text-gray-400">Sign in to continue to your account</p>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-[var(--background)]">
+      <div className="bg-[var(--sidebar-bg)] p-8 rounded-lg shadow-lg w-full max-w-md border border-[var(--border-color)]">
+        <h1 className="text-2xl font-bold text-center mb-8 text-[var(--text-primary)]">
+          Welcome to Open<span className="text-blue-500">Tutor</span>
+        </h1>
 
         <button
-          onClick={() => signIn("google", { callbackUrl: "/chat" })}
-          className="w-full flex items-center justify-center gap-3 bg-white text-gray-800 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors hover:cursor-pointer"
+          onClick={handleSignIn}
+          disabled={isLoading}
+          className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-gray-800 px-4 py-3 rounded-md transition-colors disabled:opacity-70 disabled:cursor-not-allowed relative border border-[var(--border-color)] hover:cursor-pointer"
         >
-          <Image src="/google.svg" alt="Google" width={20} height={20} />
-          <span className="font-medium">Sign in with Google</span>
+          {!isLoading && (
+            <Image
+              src="/google.svg"
+              alt="Google"
+              width={20}
+              height={20}
+              className="w-5 h-5"
+            />
+          )}
+
+          {isLoading ? (
+            <>
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"
+                  style={{ animationDelay: "0ms" }}
+                ></div>
+                <div
+                  className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"
+                  style={{ animationDelay: "150ms" }}
+                ></div>
+                <div
+                  className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"
+                  style={{ animationDelay: "300ms" }}
+                ></div>
+              </div>
+              <span className="ml-2 text-gray-800">Signing in...</span>
+            </>
+          ) : (
+            <span className="text-gray-800">Sign in with Google</span>
+          )}
         </button>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
-          By signing in, you agree to our Terms of Service and Privacy Policy
-        </p>
+        <div className="mt-8 text-center">
+          <p className="text-sm text-[var(--text-secondary)]">
+            Your personal teaching assistant for statistics
+          </p>
+          <p className="mt-2 text-xs text-[var(--text-secondary)]">
+            Sign in to start learning
+          </p>
+        </div>
       </div>
     </div>
   );
