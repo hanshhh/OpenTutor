@@ -78,7 +78,7 @@ export function ChatHeader({ username, userImage }: ChatHeaderProps) {
             </div>
             <button
               onClick={() => signOut({ callbackUrl: "/signin" })}
-              className="w-full px-4 py-2 text-sm text-left text-red-500 hover:bg-[#3D3D3D] transition-colors flex items-center gap-2"
+              className="w-full px-4 py-2 text-sm text-left text-red-500 hover:bg-[#3D3D3D] transition-colors flex items-center gap-2 hover:cursor-pointer"
             >
               <svg
                 className="w-4 h-4"

@@ -16,7 +16,7 @@ export default function SignIn() {
 
         <button
           onClick={() => signIn("google", { callbackUrl: "/chat" })}
-          className="w-full flex items-center justify-center gap-3 bg-white text-gray-800 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+          className="w-full flex items-center justify-center gap-3 bg-white text-gray-800 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors hover:cursor-pointer"
         >
           <Image src="/google.svg" alt="Google" width={20} height={20} />
           <span className="font-medium">Sign in with Google</span>
